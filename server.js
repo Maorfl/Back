@@ -16,7 +16,9 @@ mongoose
 
 app.use(cookieParser())
 app.use(express.json())
-app.use(express.static('public'))
+app.use(express.static('public')).get('*', (req, res) => {
+  res.sendFile('/public/index.html', { root: __dirname })
+})
 
 app.use(express.static(path.resolve(__dirname, 'public')))
 
@@ -47,9 +49,6 @@ app.use('/api/stories', storiesRoutes)
 app.use('/api/chats', chatsRoutes);
 app.use('/api/reels', reelsRoutes);
 
-app.get('/**', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'))
-})
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log("Server started on port", port));
