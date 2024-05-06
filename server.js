@@ -16,9 +16,8 @@ mongoose
 
 app.use(cookieParser())
 app.use(express.json())
-app.use(express.static('public')).get('*', (req, res) => {
-  res.sendFile('/public/index.html', { root: __dirname })
-})
+app.use(express.static('public'))
+
 
 app.use(express.static(path.resolve(__dirname, 'public')))
 
