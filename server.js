@@ -17,6 +17,7 @@ mongoose
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.static('public'))
+app.use(cors())
 
 
 app.use(express.static(path.resolve(__dirname, 'public')))
@@ -47,6 +48,9 @@ app.use('/api/posts', postsRoutes)
 app.use('/api/stories', storiesRoutes)
 app.use('/api/chats', chatsRoutes);
 app.use('/api/reels', reelsRoutes);
+app.get("*", (req, res) => {
+  res.send("Page not found");
+});
 
 
 const port = process.env.PORT || 3000;
