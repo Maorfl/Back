@@ -18,18 +18,18 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(express.static('public'))
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.resolve(__dirname, 'public')))
-} else {
-  app.use(function (req, res, next) {
-    const origin = req.get('Origin') || 'http://localhost:3000';
-    res.header("Access-Control-Allow-Origin", origin);
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
-    res.header('Access-Control-Allow-Credentials', 'true');
-    next();
-  });
-}
+app.use(express.static(path.resolve(__dirname, 'public')))
+// if (process.env.NODE_ENV === 'production') {
+// } else {
+//   app.use(function (req, res, next) {
+//     const origin = req.get('Origin') || 'http://localhost:3000';
+//     res.header("Access-Control-Allow-Origin", origin);
+//     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+//     res.header('Access-Control-Allow-Credentials', 'true');
+//     next();
+//   });
+// }
 
 const usersRoutes = require('./api/users/users.routes');
 const authsRoutes = require('./api/auths/auths.routes');
